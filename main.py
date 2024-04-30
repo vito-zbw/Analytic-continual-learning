@@ -11,7 +11,8 @@ from torch.utils.data import Dataset, DataLoader
 from utils import set_determinism, validate
 from tqdm import tqdm
 
-DEVICE = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+DEVICE = None
+
 
 
 def make_dataloader(
@@ -60,6 +61,10 @@ def cache_features(
 
 
 def main(args: Dict[str, Any]):
+    global DEVICE
+    cuda_device = f"cuda:{args['gpu_id']}"
+    DEVICE = torch.device(cuda_device if torch.cuda.is_available() else "cpu")
+
     backbone_name = args["backbone"]
 
     if args["seed"] is not None:

@@ -113,6 +113,10 @@ _model_group.add_argument(
     "--dataset-seed", default=None, type=int, help="Seed for shuffling the dataset."
 )
 
+_model_group.add_argument(
+    "--gpu_id", default='0', type=str, help="id(s) for CUDA_VISIBLE_DEVICES"
+)
+
 # Base training arguments
 _base_group = _parser.add_argument_group("Base training arguments")
 
@@ -209,6 +213,8 @@ _il_group.add_argument(
     type=float,
     help="The regularization of the linear classifier in compensation stream (DS-AL only)",
 )
+
+
 
 
 def load_args() -> Dict[str, Any]:
